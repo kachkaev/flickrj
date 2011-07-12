@@ -18,6 +18,7 @@ public class Contact implements BuddyIconable {
     private String id;
     private String username;
     private String realName;
+    private String location;
     private boolean friend;
     private boolean family;
     private boolean ignored;
@@ -52,6 +53,14 @@ public class Contact implements BuddyIconable {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+    
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public boolean isFriend() {

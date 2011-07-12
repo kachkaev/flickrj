@@ -79,6 +79,7 @@ public class ContactsInterface {
             contact.setId(contactElement.getAttribute("nsid"));
             contact.setUsername(contactElement.getAttribute("username"));
             contact.setRealName(contactElement.getAttribute("realname"));
+            contact.setLocation(contactElement.getAttribute("location"));
             contact.setFriend("1".equals(contactElement.getAttribute("friend")));
             contact.setFamily("1".equals(contactElement.getAttribute("family")));
             contact.setIgnored("1".equals(contactElement.getAttribute("ignored")));
