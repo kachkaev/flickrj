@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.thomnichols.flickr</groupId>
+  <artifactId>flickrapi</artifactId>
+  <version>1.2-SNAPSHOT</version>
+  <name>FlickrJ</name>
+  <url>http://github.com/tomstrummer/flickrj</url>
+  <!-- 
+  <url>http://flickrj.sourceforge.net/</url>
+   -->
+  <description>Flickrj is Java API which wraps the REST-based Flickr API
+  	This version has been forked to add some additional features from the 
+  	sourceforge version</description>
+  <licenses>
+    <license>
+      <name>BSD License</name>
+      <url>http://flickrj.cvs.sourceforge.net/*checkout*/flickrj/api/LICENSE.txt?revision=1.2</url>
+    </license>
+  </licenses>
+
+  <dependencies>
+  	<!-- 
+    <dependency>
+      <groupId>axis</groupId>
+      <artifactId>axis</artifactId>
+      <version>1.2.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>wsdl4j</groupId>
+          <artifactId>wsdl4j</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>javax.activation</groupId>
+          <artifactId>activation</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>javax.mail</groupId>
+          <artifactId>mail</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>axis</groupId>
+      <artifactId>axis-jaxrpc</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+     -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<!--<testSourceDirectory>test</testSourceDirectory>-->
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
