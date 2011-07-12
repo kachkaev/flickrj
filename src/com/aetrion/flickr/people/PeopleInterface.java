@@ -38,6 +38,7 @@ public class PeopleInterface {
     public static final String METHOD_GET_INFO = "flickr.people.getInfo";
     public static final String METHOD_GET_ONLINE_LIST = "flickr.people.getOnlineList";
     public static final String METHOD_GET_PUBLIC_GROUPS = "flickr.people.getPublicGroups";
+    public static final String METHOD_GET_PHOTOS = "flickr.people.getPhotos";
     public static final String METHOD_GET_PUBLIC_PHOTOS = "flickr.people.getPublicPhotos";
     public static final String METHOD_GET_UPLOAD_STATUS = "flickr.people.getUploadStatus";
 
@@ -243,6 +244,81 @@ public class PeopleInterface {
 		photos.setPages(photosElement.getAttribute("pages"));
 		photos.setPerPage(photosElement.getAttribute("perpage"));
 		photos.setTotal(photosElement.getAttribute("total"));
+
+        NodeList photoNodes = photosElement.getElementsByTagName("photo");
+        for (int i = 0; i < photoNodes.getLength(); i++) {
+            Element photoElement = (Element) photoNodes.item(i);
+            photos.add(PhotoUtils.createPhoto(photoElement));
+        }
+        return photos;
+    }
+
+    /**
+     * Get a collection of public photos for the specified user ID.
+     *
+     * @see com.aetrion.flickr.photos.Extras
+     * @param userId The User ID
+     * @param extras Set of extra-attributes to include (may be null)
+     * @param minUploadDate
+     * @param maxUploadDate
+     * @param minTakenDate
+     * @param maxTakenDate
+     * @param contentType
+     * @param perPage The number of photos per page
+     * @param page The page offset
+     * @return The PhotoList collection
+     * @throws IOException
+     * @throws SAXException
+     * @throws FlickrException
+     */
+    public PhotoList getPhotos( String userId, Set extras,
+            long minUploadDate, long maxUploadDate, 
+            long minTakenDate, long maxTakenDate, 
+            int contentType, 
+            int perPage, int page ) 
+            throws IOException, SAXException, FlickrException {
+        PhotoList photos = new PhotoList();
+
+        List parameters = new ArrayList();
+        parameters.add(new Parameter("method", METHOD_GET_PHOTOS));
+        parameters.add(new Parameter("api_key", apiKey));
+
+        parameters.add(new Parameter("user_id", userId));
+
+				if (minUploadDate > 0) {
+            parameters.add(new Parameter("min_upload_date", "" + minUploadDate));
+				}
+				if (maxUploadDate > 0) {
+            parameters.add(new Parameter("max_upload_date", "" + maxUploadDate));
+				}
+				if (minTakenDate > 0) {
+            parameters.add(new Parameter("min_taken_date", "" + minTakenDate));
+				}
+				if (maxTakenDate > 0) {
+            parameters.add(new Parameter("max_taken_date", "" + maxTakenDate));
+				}
+        if (perPage > 0) {
+            parameters.add(new Parameter("per_page", "" + perPage));
+        }
+        if (page > 0) {
+            parameters.add(new Parameter("page", "" + page));
+        }
+
+        if (extras != null) {
+            parameters.add(new Parameter(Extras.KEY_EXTRAS, StringUtilities.join(extras, ",")));
+        }
+        parameters.add( new Parameter( "api_sig",
+                AuthUtilities.getSignature(sharedSecret, parameters) ) );
+
+        Response response = transportAPI.get(transportAPI.getPath(), parameters);
+        if (response.isError()) {
+            throw new FlickrException(response.getErrorCode(), response.getErrorMessage());
+        }
+        Element photosElement = response.getPayload();
+        photos.setPage(photosElement.getAttribute("page"));
+        photos.setPages(photosElement.getAttribute("pages"));
+        photos.setPerPage(photosElement.getAttribute("perpage"));
+        photos.setTotal(photosElement.getAttribute("total"));
 
         NodeList photoNodes = photosElement.getElementsByTagName("photo");
         for (int i = 0; i < photoNodes.getLength(); i++) {
