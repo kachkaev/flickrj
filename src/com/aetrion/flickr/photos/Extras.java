@@ -16,6 +16,7 @@ public class Extras {
 	private static final long serialVersionUID = 12L;
     public static final String KEY_EXTRAS = "extras";
 
+    public static final String DESCRIPTION = "description";
     public static final String LICENSE = "license";
     public static final String DATE_UPLOAD = "date_upload";
     public static final String DATE_TAKEN = "date_taken";
@@ -74,6 +75,7 @@ public class Extras {
     public static final Set MIN_EXTRAS = new HashSet();
 
     static {
+    	ALL_EXTRAS.add(DESCRIPTION);
         ALL_EXTRAS.add(DATE_TAKEN);
         ALL_EXTRAS.add(DATE_UPLOAD);
         ALL_EXTRAS.add(ICON_SERVER);

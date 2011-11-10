@@ -83,6 +83,8 @@ public final class PhotoUtils {
         photo.setMedia(photoElement.getAttribute("media"));
         photo.setMediaStatus(photoElement.getAttribute("media_status"));
         photo.setPathAlias(photoElement.getAttribute("pathalias"));
+        // flickr.flickr.photos.search provides this value when views is stated in extras!
+        photo.setViews(photoElement.getAttribute("views"));
 
         // If the attributes active that contain the image-urls,
         // Size-objects created from them, which are used to override

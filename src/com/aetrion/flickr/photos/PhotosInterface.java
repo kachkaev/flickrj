@@ -1039,6 +1039,22 @@ public class PhotosInterface {
      * @throws FlickrException
      */
     public PhotoList search(SearchParameters params, int perPage, int page)
+            throws IOException, SAXException, FlickrException {
+    	return search(params, perPage, page, null);
+    }
+
+    /**
+     * Search for photos which match the given search parameters.
+     *
+     * @param params The search parameters
+     * @param perPage The number of photos to show per page
+     * @param page The page offset
+     * @return A PhotoList
+     * @throws IOException
+     * @throws SAXException
+     * @throws FlickrException
+     */
+    public PhotoList search(SearchParameters params, int perPage, int page, ArrayList extras)
         throws IOException, SAXException, FlickrException {
         PhotoList photos = new PhotoList();
 
@@ -1054,6 +1070,10 @@ public class PhotosInterface {
         if (page > 0) {
             parameters.add(new Parameter("page", "" + page));
         }
+        if (extras != null) {
+        	
+        }
+        
         parameters.add(
             new Parameter(
                 "api_sig",
