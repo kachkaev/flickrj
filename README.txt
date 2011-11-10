@@ -28,7 +28,7 @@ Usage example
 	PhotoList photoList = photos.search(criteria, 250, 1);
 
 
-JAR FILE
+Jar file
 ------------------------
 Jar file is in the “build” directory. You can use that or just fork the source and build the project on your own machine.
 
